@@ -31,7 +31,8 @@ preprocess <- function(raw_data,input_file,inputs,method,top,filenames,use_colum
   else if (method == "geneid") { # preferred
     heatmap_id <- toupper(raw_data$GeneID)
     geneList <- toupper(geneList)
-
+  }
+  
   # Filter down to desired genes
   matchingGenes <- na.omit(match(geneList,heatmap_id))
   heatmap_filtered_genes <- raw_data[matchingGenes,]
