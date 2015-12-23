@@ -25,22 +25,22 @@ preprocess <- function(raw_data,input_file,inputs,method,top,filenames,use_colum
   
   # Extract gene name and ID
   if(method == "symbol") {
-    heatmap_id <- toupper(raw_data[,1])
+    heatmap_id <- toupper(raw_data$Symbol)
     geneList <- toupper(geneList)
   }
   else if (method == "geneid") { # preferred
-    heatmap_id <- raw_data[,2]
+    heatmap_id <- raw_data$GeneID
   }
   
   # Filter down to desired genes
   matchingGenes <- na.omit(match(geneList,heatmap_id))
   heatmap_filtered_genes <- raw_data[matchingGenes,]
-    
+  
   # Sort by adjusted p-value
   heatmap_filtered_genes$padj <- as.numeric(heatmap_filtered_genes$padj)
   heatmap_filtered_genes <- heatmap_filtered_genes[order(heatmap_filtered_genes$padj),]
   
-  # Filter down to just data columns
+  # Filter down to jutst data columns  
   heatmap_values <- heatmap_filtered_genes[,use_column_range]
   heatmap_values[heatmap_values==0] <- 1
   
@@ -65,8 +65,10 @@ preprocess <- function(raw_data,input_file,inputs,method,top,filenames,use_colum
       heatmap_filtered_genes <- heatmap_filtered_genes[1:top,]
       heatmap_values <- heatmap_values[1:top,]
     }
-  }  
-  output_csv <- heatmap_filtered_genes[,c("Symbol","GeneID","Alias","Description")]
+  }
+  # Use available columns from the list desired in #71 for 
+  # output csv of truncated data to just desired genes
+  output_csv <- heatmap_filtered_genes[,colnames(heatmap_filtered_genes)[c("Symbol","GeneID","Alias","Description") %in% names]]
   output_csv <- data.frame(output_csv,heatmap_filtered_genes[,use_column_range])
   output_csv <- data.frame(output_csv,heatmap_filtered_genes[,c("baseMean","log2FoldChange","lfcSE","stat","pvalue","padj")])
   write.csv(output_csv,file=filenames$csv)
