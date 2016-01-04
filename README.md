@@ -39,6 +39,6 @@ deseqHeatmap(deseq="deseqoutput.xlsx", sheet=1, columns=5:14, inputs="inputDirec
 This alternate approach uses the gene ID identifier but chooses to use all genes that meet the threshold. Input files will need to be
 formatted appropriately.
 ```
-deseqHeatmap(deseq="deseqoutput.xlsx", sheet=1, columns=5:14,inputs="inputDirectory", method="geneid")
+deseqHeatmap(deseq="deseqoutput.xlsx", sheet=1, columns=5:14, inputs="inputDirectory", method="geneid")
 ```
 
