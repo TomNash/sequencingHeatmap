@@ -51,22 +51,24 @@ heatmap_make <- function(heatmap_data,graph_title,cluster,filenames) {
             col=heatmap_colors)
   invisible(dev.off())               # close the PDF device
   print(paste0("PDF of heatmap has been created at ./",filenames$pdf))
-  
-  tiff(filenames$tiff)
-  heatmap.2(heatmap_data,
-            hclustfun=function(x) hclust(x,method="ward.D2"),
-            distfun=function(x) dist(x,method="euclidean"),
-            main = graph_title,
-            trace="none",         # turns off trace lines inside the heat map
-            margins =c(12,9),     # widens margins around plot
-            dendrogram=dendro_status,
-            density.info="none",
-            Rowv=row_v,
-            Colv=col_v,
-            breaks=c(-7:-1/7,1:7/7),
-            col=heatmap_colors)
-  invisible(dev.off())               # close the TIFF device
-  print(paste0("TIFF of heatmap has been created at ./",filenames$tiff))
+
+  if(capabilities("tiff")) {
+    tiff(filenames$tiff)
+    heatmap.2(heatmap_data,
+              hclustfun=function(x) hclust(x,method="ward.D2"),
+              distfun=function(x) dist(x,method="euclidean"),
+              main = graph_title,
+              trace="none",         # turns off trace lines inside the heat map
+              margins =c(12,9),     # widens margins around plot
+              dendrogram=dendro_status,
+              density.info="none",
+              Rowv=row_v,
+              Colv=col_v,
+              breaks=c(-7:-1/7,1:7/7),
+              col=heatmap_colors)
+    invisible(dev.off())               # close the TIFF device
+    print(paste0("TIFF of heatmap has been created at ./",filenames$tiff))
+  }
   
   suppressWarnings(xfig(filenames$xfig))
   heatmap.2(heatmap_data,
