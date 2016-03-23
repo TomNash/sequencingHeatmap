@@ -60,7 +60,7 @@
 #' |       |---deseqoutput-genelist1-top125-truncated.csv}
 #' @export
 
-deseqHeatmap <- function(deseq,sheet,columns,inputs,method,top){
+deseqHeatmap <- function(deseq,sheet,columns,inputs,method,cutoff.p=0.4,top){
   if(missing(top)) { top=NULL }
   
   input_verify(deseq,sheet,columns,inputs,method,top)
@@ -78,7 +78,7 @@ deseqHeatmap <- function(deseq,sheet,columns,inputs,method,top){
     if(!is.null(top)) {
       for (i in 1:length(top)) {
         filenames <- output_filenames(top[i],input_file,inputs,deseq)
-        preprocessed_data <- preprocess(raw_data,input_file,inputs,method,top[i],filenames,columns)
+        preprocessed_data <- preprocess(raw_data,input_file,inputs,method,top[i],filenames,columns,cutoff.p)
         if (typeof(preprocessed_data)=="logical") { break }
         heatmap_ready <- fc_calculations(preprocessed_data,filenames,input_file)
         if (typeof(heatmap_ready)=="logical") { break }
@@ -86,7 +86,7 @@ deseqHeatmap <- function(deseq,sheet,columns,inputs,method,top){
       }
     } else {
       filenames <- output_filenames(top,input_file,inputs,deseq)
-      preprocessed_data <- preprocess(raw_data,input_file,inputs,method,top,filenames,columns)
+      preprocessed_data <- preprocess(raw_data,input_file,inputs,method,top,filenames,columns,cutoff.p)
       if (typeof(preprocessed_data)=="logical") { break }
       heatmap_ready <- fc_calculations(preprocessed_data,filenames,input_file)
       if (typeof(heatmap_ready)=="logical") { break }

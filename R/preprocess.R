@@ -1,4 +1,4 @@
-preprocess <- function(raw_data,input_file,inputs,method,top,filenames,use_column_range){
+preprocess <- function(raw_data,input_file,inputs,method,top,filenames,use_column_range,cutoff.p){
   # Read in contents of current file
   geneList <- readLines(paste0(inputs,"/",input_file))
   
@@ -45,7 +45,7 @@ preprocess <- function(raw_data,input_file,inputs,method,top,filenames,use_colum
   heatmap_values <- heatmap_filtered_genes[,use_column_range]
   heatmap_values[heatmap_values==0] <- 1
   
-  removeIndices <- which(as.numeric(heatmap_filtered_genes$padj >= 0.4) | 
+  removeIndices <- which(as.numeric(heatmap_filtered_genes$padj >= cutoff.p) | 
                            is.na(heatmap_filtered_genes$padj) | 
                            heatmap_filtered_genes$baseMean < 15)
   
