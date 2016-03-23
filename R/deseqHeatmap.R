@@ -60,7 +60,8 @@
 #' |       |---deseqoutput-genelist1-top125-truncated.csv}
 #' @export
 
-deseqHeatmap <- function(deseq,sheet,columns,inputs,method,cutoff.p=0.4,top){
+deseqHeatmap <- function(deseq,sheet,columns,inputs,method,cutoff.p=0.4,
+                         baseMeanCount=15,top){
   if(missing(top)) { top=NULL }
   
   input_verify(deseq,sheet,columns,inputs,method,top)
