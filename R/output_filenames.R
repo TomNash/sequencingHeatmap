@@ -1,6 +1,6 @@
 output_filenames <- function(top,input_file,inputs,deseq){
   if (is.null(top)){
-    base_filename <- basename(file_path_sans_ext(input_file))
+    base_filename <- basename(tools::file_path_sans_ext(input_file))
     eps_full <- paste0("deseqHeatmap-output/",inputs,"/",base_filename,"-all.eps")
     csv_full <- paste0("deseqHeatmap-output/",inputs,"/",basename(file_path_sans_ext(deseq)),
                            "-",base_filename,"-all-truncated.csv")
@@ -11,9 +11,9 @@ output_filenames <- function(top,input_file,inputs,deseq){
     xfig_full <- paste0("deseqHeatmap-output/",inputs,"/",base_filename,"-all.fig")
   } else {
     top <- strtoi(top)
-    base_filename <- basename(file_path_sans_ext(input_file))
+    base_filename <- basename(tools::file_path_sans_ext(input_file))
     eps_full <- paste0("deseqHeatmap-output/",inputs,"/",base_filename,"-top",top,".eps")
-    csv_full <- paste0("deseqHeatmap-output/",inputs,"/",basename(file_path_sans_ext(deseq)),
+    csv_full <- paste0("deseqHeatmap-output/",inputs,"/",basename(tools::file_path_sans_ext(deseq)),
                            "-",base_filename,"-top",top,"-truncated.csv")
     pdf_full <- paste0("deseqHeatmap-output/",inputs,"/",base_filename,"-top",top,".pdf")
     fc_full <- paste0("deseqHeatmap-output/",inputs,"/",

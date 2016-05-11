@@ -3,6 +3,7 @@ fc_calculations <- function(data_list,filenames,input_file) {
   heatmap_values <- data_list$values
   baseMeans <- gene_data$baseMean
   symbol <- gene_data$Symbol
+  geneID <- gene_data$GeneID
   # Convert to logBASE2 space and calculate difference of values and medians
   log2space_diff <- log2(heatmap_values) - log2(baseMeans)
   
@@ -10,6 +11,15 @@ fc_calculations <- function(data_list,filenames,input_file) {
   fold_change <- ifelse(log2space_diff > 0, 2^log2space_diff, (-1)*2^(-log2space_diff))
   
   # Write out to CSV the fold-change data
+  unique_dup_symbol <- unique(symbol[which(symbol %in% symbol[duplicated(symbol)])])
+  for (dup_symbol in unique_dup_symbol) {
+    dup_symbol_index <- which(symbol %in% dup_symbol)
+    for (i in 1:length(dup_symbol_index)) {
+      symbol[dup_symbol_index[i]] <- ifelse(i==1,
+                                         dup_symbol,
+                                         paste0(dup_symbol,".",geneID[dup_symbol_index[i]]))
+    }
+  }
   processed_data <- data.frame(symbol,fold_change,row.names=1)
   write.csv(processed_data,file=filenames$fc)
   print(paste0("CSV of fold-change values has been created for ",input_file))

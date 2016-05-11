@@ -71,9 +71,9 @@ deseqHeatmap <- function(deseq,sheet,columns,inputs,method,cutoff.p=0.4,
     dir.create(file.path(getwd(), "deseqHeatmap-output"), showWarnings = FALSE)
   }
   # Read in Excel spreadsheet
-  raw_data <- read.xlsx(deseq,sheet=strtoi(sheet))
+  raw_data <- openxlsx::read.xlsx(deseq,sheet=strtoi(sheet))
 
-  if(str_sub(inputs,-1)=="/") { inputs <- substr(inputs,1,nchar(inputs)-1) }
+  if(stringr::str_sub(inputs,-1)=="/") { inputs <- substr(inputs,1,nchar(inputs)-1) }
 
   for (input_file in list.files(inputs)){
     if(!is.null(top)) {

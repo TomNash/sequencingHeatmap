@@ -73,7 +73,8 @@ preprocess <- function(raw_data,input_file,inputs,method,top,filenames,
   output_csv <- heatmap_filtered_genes[,colnames(heatmap_filtered_genes)
                                        [c("Symbol","GeneID","Alias","Description") %in% colnames(heatmap_filtered_genes)]]
   output_csv <- data.frame(output_csv,heatmap_filtered_genes[,use_column_range])
-  output_csv <- data.frame(output_csv,heatmap_filtered_genes[,c("baseMean","log2FoldChange","lfcSE","stat","pvalue","padj")])
+  appendTextIndex <- which(colnames(heatmap_filtered_genes) == "baseMean")
+  output_csv <- data.frame(output_csv,heatmap_filtered_genes[,appendTextIndex:use_column_range[2]])
   write.csv(output_csv,file=filenames$csv)
   return(list(genes=heatmap_filtered_genes,values=heatmap_values,title=graph_title,cluster=cluster))
 }

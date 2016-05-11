@@ -1,5 +1,5 @@
 input_verify <- function(deseq,sheet,columns,inputs,method,top) {
-  if(is.null(deseq) || file_ext(deseq) != "xlsx"){
+  if(is.null(deseq) || tools::file_ext(deseq) != "xlsx"){
     stop("No DEseq output Excel file provided.")
   }
   if(is.null(sheet) || !is.numeric(sheet)){

@@ -20,7 +20,7 @@ heatmap_make <- function(heatmap_data,graph_title,cluster,filenames) {
   # Plot the heatmaps to EPS, PDF, TIFF
   setEPS()
   postscript(filenames$eps)
-  heatmap.2(heatmap_data,
+  gplots::heatmap.2(heatmap_data,
             hclustfun=function(x) hclust(x,method="ward.D2"),
             distfun=function(x) dist(x,method="euclidean"),
             main = graph_title,
@@ -31,12 +31,13 @@ heatmap_make <- function(heatmap_data,graph_title,cluster,filenames) {
             Rowv=row_v,
             Colv=col_v,
             breaks=c(-7:-1/7,1:7/7),
+            cexRow=1,cexCol=1,srtCol=30,
             col=heatmap_colors)
   invisible(dev.off())               # close the EPS device
   print(paste0("PostScript of heatmap has been created at ./",filenames$eps))
   
   pdf(filenames$pdf,height=11,width=8.5)
-  heatmap.2(heatmap_data,
+  gplots::heatmap.2(heatmap_data,
             hclustfun=function(x) hclust(x,method="ward.D2"),
             distfun=function(x) dist(x,method="euclidean"),
             main = graph_title,
@@ -48,13 +49,14 @@ heatmap_make <- function(heatmap_data,graph_title,cluster,filenames) {
             Colv=col_v,
             keysize=1,
             breaks=c(-7:-1/7,1:7/7),
+            cexRow=1,cexCol=1,srtCol=30,
             col=heatmap_colors)
   invisible(dev.off())               # close the PDF device
   print(paste0("PDF of heatmap has been created at ./",filenames$pdf))
 
   if(capabilities("tiff")) {
     tiff(filenames$tiff)
-    heatmap.2(heatmap_data,
+    gplots::heatmap.2(heatmap_data,
               hclustfun=function(x) hclust(x,method="ward.D2"),
               distfun=function(x) dist(x,method="euclidean"),
               main = graph_title,
@@ -65,13 +67,14 @@ heatmap_make <- function(heatmap_data,graph_title,cluster,filenames) {
               Rowv=row_v,
               Colv=col_v,
               breaks=c(-7:-1/7,1:7/7),
+              cexRow=1,cexCol=1,srtCol=30,
               col=heatmap_colors)
     invisible(dev.off())               # close the TIFF device
     print(paste0("TIFF of heatmap has been created at ./",filenames$tiff))
   }
   
   suppressWarnings(xfig(filenames$xfig))
-  heatmap.2(heatmap_data,
+  gplots::heatmap.2(heatmap_data,
             hclustfun=function(x) hclust(x,method="ward.D2"),
             distfun=function(x) dist(x,method="euclidean"),
             main = graph_title,
@@ -82,6 +85,7 @@ heatmap_make <- function(heatmap_data,graph_title,cluster,filenames) {
             Rowv=row_v,
             Colv=col_v,
             breaks=c(-7:-1/7,1:7/7),
+            cexRow=1,cexCol=1,srtCol=30,
             col=heatmap_colors)
   invisible(dev.off())               # close the FIG device
   print(paste0("FIG of heatmap has been created at ./",filenames$xfig))
