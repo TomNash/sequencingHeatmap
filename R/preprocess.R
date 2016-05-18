@@ -19,9 +19,9 @@ preprocess <- function(raw_data,input_file,inputs,method,top,filenames,
     return(FALSE)
   }
   
-  if (!dir.exists(paste0(getwd(),"/deseqHeatmap-output/",inputs))){
-    print(paste0("Creating output directory at ",getwd(),"/deseqHeatmap-output/",inputs))
-    dir.create(file.path(getwd(),"deseqHeatmap-output/",inputs), showWarnings = FALSE)
+  if (!dir.exists(paste0(getwd(),"/sequencingHeatmap-output/",inputs))){
+    print(paste0("Creating output directory at ",getwd(),"/sequencingHeatmap-output/",inputs))
+    dir.create(file.path(getwd(),"sequencingHeatmap-output/",inputs), showWarnings = FALSE)
   }
   
   # Extract gene name and ID
