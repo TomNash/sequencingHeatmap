@@ -2,7 +2,7 @@ output_filenames <- function(top,input_file,inputs,sequencing){
   if (is.null(top)){
     base_filename <- basename(tools::file_path_sans_ext(input_file))
     eps_full <- paste0("sequencingHeatmap-output/",inputs,"/",base_filename,"-all.eps")
-    csv_full <- paste0("sequencingHeatmap-output/",inputs,"/",basename(file_path_sans_ext(sequencing)),
+    csv_full <- paste0("sequencingHeatmap-output/",inputs,"/",basename(tools::file_path_sans_ext(sequencing)),
                            "-",base_filename,"-all-truncated.csv")
     pdf_full <- paste0("sequencingHeatmap-output/",inputs,"/",base_filename,"-all.pdf")
     fc_full <- paste0("sequencingHeatmap-output/",inputs,"/",

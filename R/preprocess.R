@@ -68,13 +68,6 @@ preprocess <- function(raw_data,input_file,inputs,method,top,filenames,
       heatmap_values <- heatmap_values[1:top,]
     }
   }
-  # Use available columns from the list desired in #71 for 
-  # output csv of truncated data to just desired genes
-  output_csv <- heatmap_filtered_genes[,colnames(heatmap_filtered_genes)
-                                       [c("Symbol","GeneID","Alias","Description") %in% colnames(heatmap_filtered_genes)]]
-  output_csv <- data.frame(output_csv,heatmap_filtered_genes[,use_column_range])
-  appendTextIndex <- which(colnames(heatmap_filtered_genes) == "baseMean")
-  output_csv <- data.frame(output_csv,heatmap_filtered_genes[,appendTextIndex:use_column_range[2]])
-  write.csv(output_csv,file=filenames$csv)
+  write.csv(heatmap_filtered_genes,file=filenames$csv,row.names=F)
   return(list(genes=heatmap_filtered_genes,values=heatmap_values,title=graph_title,cluster=cluster))
 }
