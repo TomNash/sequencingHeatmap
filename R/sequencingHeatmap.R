@@ -7,6 +7,8 @@
 #' @param inputs The path to the directory which contains files of genes of interest, i.e.
 #' inputs="path/to/inputs/"
 #' @param method The method of identifying each gene. It must be either method="symbol" or method="geneid"
+#' @param baseMeanCount Threshold for omitting genes, all genes with expression below this value will not be included,
+#' default is set to 15 but set to 0 to include all genes
 #' @param top (optional) The number of top genes to select, filtered by adjusted p-value. Can use
 #' multiple values for one run, i.e. top=100 or top=c(100,125,150)
 #' @examples
