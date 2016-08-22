@@ -1,26 +1,26 @@
-output_filenames <- function(top,input_file,inputs,sequencing){
+OutputFilenames <- function(top, input.file, subsets.directory, sequencing){
   if (is.null(top)){
-    base_filename <- basename(tools::file_path_sans_ext(input_file))
-    eps_full <- paste0("sequencingHeatmap-output/",inputs,"/",base_filename,"-all.eps")
-    csv_full <- paste0("sequencingHeatmap-output/",inputs,"/",basename(tools::file_path_sans_ext(sequencing)),
-                           "-",base_filename,"-all-truncated.csv")
-    pdf_full <- paste0("sequencingHeatmap-output/",inputs,"/",base_filename,"-all.pdf")
-    fc_full <- paste0("sequencingHeatmap-output/",inputs,"/",
-                                  base_filename,"-all-foldChange.csv")
-    tiff_full <- paste0("sequencingHeatmap-output/",inputs,"/",base_filename,"-all.tiff")
-    xfig_full <- paste0("sequencingHeatmap-output/",inputs,"/",base_filename,"-all.fig")
+    base.filename <- basename(tools::file_path_sans_ext(input.file))
+    eps.full <- paste0("sequencingHeatmap-output/", subsets.directory, "/", base.filename, "-all.eps")
+    csv.full <- paste0("sequencingHeatmap-output/", subsets.directory, "/", basename(tools::file_path_sans_ext(sequencing)),
+                           "-", base.filename, "-all-truncated.csv")
+    pdf.full <- paste0("sequencingHeatmap-output/", subsets.directory, "/", base.filename, "-all.pdf")
+    fc.full <- paste0("sequencingHeatmap-output/", subsets.directory, "/",
+                                  base.filename, "-all-foldChange.csv")
+    tiff.full <- paste0("sequencingHeatmap-output/", subsets.directory, "/", base.filename, "-all.tiff")
+    xfig.full <- paste0("sequencingHeatmap-output/", subsets.directory, "/", base.filename, "-all.fig")
   } else {
     top <- strtoi(top)
-    base_filename <- basename(tools::file_path_sans_ext(input_file))
-    eps_full <- paste0("sequencingHeatmap-output/",inputs,"/",base_filename,"-top",top,".eps")
-    csv_full <- paste0("sequencingHeatmap-output/",inputs,"/",basename(tools::file_path_sans_ext(sequencing)),
-                           "-",base_filename,"-top",top,"-truncated.csv")
-    pdf_full <- paste0("sequencingHeatmap-output/",inputs,"/",base_filename,"-top",top,".pdf")
-    fc_full <- paste0("sequencingHeatmap-output/",inputs,"/",
-                                  base_filename,"-top",top,"-foldChange.csv")
-    tiff_full <- paste0("sequencingHeatmap-output/",inputs,"/",base_filename,"-top",top,".tiff")
-    xfig_full <- paste0("sequencingHeatmap-output/",inputs,"/",base_filename,"-top",top,".fig")
+    base.filename <- basename(tools::file_path_sans_ext(input.file))
+    eps.full <- paste0("sequencingHeatmap-output/", subsets.directory, "/", base.filename, "-top", top, ".eps")
+    csv.full <- paste0("sequencingHeatmap-output/", subsets.directory, "/", basename(tools::file_path_sans_ext(sequencing)),
+                           "-", base.filename, "-top", top, "-truncated.csv")
+    pdf.full <- paste0("sequencingHeatmap-output/", subsets.directory, "/", base.filename, "-top", top, ".pdf")
+    fc.full <- paste0("sequencingHeatmap-output/", subsets.directory, "/",
+                                  base.filename, "-top", top, "-foldChange.csv")
+    tiff.full <- paste0("sequencingHeatmap-output/", subsets.directory, "/", base.filename, "-top", top, ".tiff")
+    xfig.full <- paste0("sequencingHeatmap-output/", subsets.directory, "/", base.filename, "-top", top, ".fig")
   }
-  file_list <- list(eps=eps_full,csv=csv_full,pdf=pdf_full,fc=fc_full,tiff=tiff_full,xfig=xfig_full)
-  return(file_list)
+  file.list <- list(eps=eps.full, csv=csv.full, pdf=pdf.full, fc=fc.full, tiff=tiff.full, xfig=xfig.full)
+  return(file.list)
 }
