@@ -4,7 +4,7 @@ Users provide the output file, a directory containing subsets of genes to map, a
 following file formats: PDF, TIFF, FIG, and PostScript. Fold-change calculations are performed with normalization through dividing by
 the maximum value and square root transformation.
 
-| Note: Threshold is set so that only genes with a reported adjusted p-value < 0.4 and count >= 15 will be used.
+| Note: Threshold is set by default to include only genes with a reported adjusted p-value < 0.4 and count >= 15. This can be changed by setting the appropriate variables.
 
 Heatmaps are generated using Ward clustering and Euclidean distance via the `heatmap.2` package.
 
